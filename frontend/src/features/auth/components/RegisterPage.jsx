@@ -17,8 +17,9 @@ export const RegisterPage = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
+    // 🔥 USAMOS "name" para coincidir con backend
     const [form, setForm] = React.useState({
-        nombre: '',
+        name: '',
         email: '',
         password: ''
     });
@@ -48,8 +49,8 @@ export const RegisterPage = () => {
     };
 
     const isValid =
-        form.nombre && form.email && form.password &&
-        !errors.nombre && !errors.email && !errors.password;
+        form.name && form.email && form.password &&
+        !errors.name && !errors.email && !errors.password;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,10 +61,12 @@ export const RegisterPage = () => {
             setApiError('');
 
             const res = await registerRequest({
-                nombre: form.nombre.trim(),
+                name: form.name.trim(),
                 email: form.email.toLowerCase().trim(),
                 password: form.password.trim()
             });
+
+            console.log("✅ RESPUESTA:", res.data);
 
             const { token, user } = res.data;
 
@@ -71,8 +74,12 @@ export const RegisterPage = () => {
             navigate('/dashboard', { replace: true });
 
         } catch (err) {
-            console.log("🔥 ERROR COMPLETO:", err.response?.data); // 👈 CLAVE
-            const msg = err?.response?.data?.message || 'No se pudo registrar';
+            console.log("🔥 ERROR:", err.response?.data);
+
+            const msg =
+                err?.response?.data?.message ||
+                'No se pudo registrar';
+
             setApiError(msg);
         } finally {
             setLoading(false);
@@ -125,13 +132,14 @@ export const RegisterPage = () => {
                         </Alert>
                     )}
 
+                    {/* NAME */}
                     <TextField
-                        name="nombre"
+                        name="name"
                         label="Nombre"
-                        value={form.nombre}
+                        value={form.name}
                         onChange={handleChange}
-                        error={!!errors.nombre}
-                        helperText={errors.nombre}
+                        error={!!errors.name}
+                        helperText={errors.name}
                         fullWidth
                         sx={{ mb: 2.5, ...inputStyle }}
                         InputProps={{
@@ -143,6 +151,7 @@ export const RegisterPage = () => {
                         }}
                     />
 
+                    {/* EMAIL */}
                     <TextField
                         name="email"
                         label="Correo electrónico"
@@ -162,6 +171,7 @@ export const RegisterPage = () => {
                         }}
                     />
 
+                    {/* PASSWORD */}
                     <TextField
                         name="password"
                         label="Contraseña"
