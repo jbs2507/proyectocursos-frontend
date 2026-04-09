@@ -1,35 +1,25 @@
 {
-  "name": "frontend-cursos",
-  "private": true,
+  "name": "backend-gastos",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Backend API para gestión de gastos diarios",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "seed": "node src/seed.js"
   },
+  "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.20",
-    "@mui/material": "^5.15.20",
-    "@vitejs/plugin-react": "^4.3.1",
-    "axios": "^1.7.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0",
-    "recharts": "^2.12.7",
-    "vite": "^5.3.1",
-    "vite-plugin-pwa": "^0.20.1"
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.3",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "eslint": "^9.5.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
-    "globals": "^15.6.0"
+    "nodemon": "^3.1.14"
   }
 }
