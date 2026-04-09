@@ -8,9 +8,9 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             manifest: {
-                name: 'EduTrack - Gestión de Cursos',
-                short_name: 'EduTrack',
-                description: 'Plataforma de gestión de cursos universitarios',
+                name: 'Gestión de Gastos',
+                short_name: 'SpendWise',
+                description: 'Plataforma de gestión de gastos diarios',
                 theme_color: '#2563eb',
                 background_color: '#ffffff',
                 display: 'standalone',

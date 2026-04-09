@@ -8,7 +8,7 @@ import axios from 'axios';
  * - Producción: VITE_API_URL (configurado en Vercel)
  */
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://proyectocursos-backend-2b6m.onrender.com',
   headers: { 'Content-Type': 'application/json' },
 });
 
