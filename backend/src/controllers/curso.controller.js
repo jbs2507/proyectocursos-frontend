@@ -1,4 +1,3 @@
-// src/controllers/curso.controller.js
 import { validationResult } from 'express-validator';
 import Curso from '../models/Curso.js';
 

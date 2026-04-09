@@ -1,74 +1,44 @@
-// src/controllers/auth.controller.js
-import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-
-// Generar JWT
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-};
+import bcrypt from 'bcryptjs';
+import User from '../models/User.js';
 
 // POST /api/auth/register
-export const register = async (req, res) => {
-  const { name, email, password } = req.body;
-
-  // Validación básica
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "Faltan datos requeridos" });
-  }
-
+export const register = async (req, res, next) => {
   try {
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: "Usuario ya existe" });
-    }
+    const { nombre, email, password } = req.body;
+    if (!nombre || !email || !password)
+      return res.status(400).json({ message: 'Todos los campos son requeridos' });
 
-    const user = await User.create({ name, email, password });
+    const exist = await User.findOne({ email: email.toLowerCase().trim() });
+    if (exist) return res.status(400).json({ message: 'El usuario ya existe' });
 
-    res.status(201).json({
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
-      token: generateToken(user._id),
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error interno del servidor", error });
-  }
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ nombre, email: email.toLowerCase().trim(), password: hashedPassword });
+    await newUser.save();
+
+    const token = jwt.sign({ uid: newUser._id, nombre: newUser.nombre, email: newUser.email, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '8h' });
+
+    res.status(201).json({ token, user: { id: newUser._id, nombre: newUser.nombre, email: newUser.email, role: newUser.role } });
+
+  } catch (err) { next(err); }
 };
 
 // POST /api/auth/login
-export const login = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "Faltan datos requeridos" });
-  }
-
+export const login = async (req, res, next) => {
   try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "Usuario no encontrado" });
-    }
+    const { email, password } = req.body;
+    if (!email || !password) return res.status(400).json({ message: 'Email y contraseña son requeridos' });
 
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Contraseña incorrecta" });
-    }
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    if (!user) return res.status(401).json({ message: 'Credenciales inválidas' });
 
-    res.status(200).json({
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
-      token: generateToken(user._id),
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error interno del servidor", error });
-  }
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok) return res.status(401).json({ message: 'Credenciales inválidas' });
+
+    const token = jwt.sign({ uid: user._id, nombre: user.nombre, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '8h' });
+
+    res.json({ token, user: { id: user._id, nombre: user.nombre, email: user.email, role: user.role } });
+
+  } catch (err) { next(err); }
 };
