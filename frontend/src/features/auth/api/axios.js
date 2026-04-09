@@ -6,7 +6,7 @@ import axios from 'axios';
  * baseURL apunta al backend (Render en producción, localhost en dev).
  */
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
+    baseURL: import.meta.env.VITE_API_URL || 'https://proyectocursos-backend.onrender.com/api',
     headers: { 'Content-Type': 'application/json' }
 });
 
