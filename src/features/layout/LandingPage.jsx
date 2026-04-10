@@ -92,6 +92,31 @@ export const LandingPage = () => {
                         >
                             Empezar gratis
                         </Button>
+                        <Button
+                        component="a"
+                        href="https://github.com/jbs2507/proyectocursos-frontend"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        endIcon={<ArrowForwardIcon />}
+                        sx={{
+                        backgroundColor: '#60fa81',
+                        color: 'white',
+                        px: 4,
+                        py: 1.8,
+                        borderRadius: '12px',
+                        textTransform: 'none',
+                        fontFamily: "'Sora', sans-serif",
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        '&:hover': {
+                        backgroundColor: '#60fa81', // mismo color
+                        transform: 'translateY(-2px)'
+                        },
+                        transition: '0.2s'
+                    }}
+                        >
+                        Repositorio GitHub
+                        </Button>
                     </Stack>
 
                     {/* Stats */}
