@@ -1,4 +1,4 @@
-# EduTrack — Gestión de Cursos Universitarios
+# SpendWise - Gestión para gastos diarios
 
 Aplicación web full-stack para el registro, consulta, actualización y eliminación de cursos universitarios. Incluye Landing Page, autenticación JWT y CRUD completo.
 
