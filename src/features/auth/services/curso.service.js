@@ -3,17 +3,17 @@ import api from '../api/axios';
 
 /** 🔐 Login */
 export const loginRequest = (data) => {
-    return api.post('api/auth/login', data);
+    return api.post('/api/auth/login', data);
 };
 
 /** 📝 Registro de usuario */
 export const registerRequest = (data) => {
-    return api.post('/auth/register', data);
+    return api.post('/api/auth/register', data);
 };
 
 /** 👤 Perfil del usuario autenticado */
 export const getMe = () => {
-    return api.get('/auth/me');
+    return api.get('/api/auth/me');
 };
 
 /** 📄 Listar cursos (con búsqueda ?q=texto&page=1&limit=10) */
