@@ -1,181 +1,58 @@
-# EduTrack — Gestión de Cursos Universitarios
+SpendWise - Frontend
+Descripción
 
-Aplicación web full-stack para el registro, consulta, actualización y eliminación de cursos universitarios. Incluye Landing Page, autenticación JWT y CRUD completo.
+SpendWise es una aplicación web diseñada para la gestión inteligente de gastos y finanzas personales. Permite a los usuarios registrarse, iniciar sesión y llevar un control organizado de su información financiera.
 
----
+El frontend está desarrollado con tecnologías modernas y se conecta a un backend mediante una API REST para gestionar autenticación y datos del usuario.
 
-## 🛠 Tecnologías
-
-| Capa       | Tecnología                          |
-|------------|--------------------------------------|
-| Frontend   | React 19 + Vite + Material UI        |
-| Backend    | Node.js + Express 5                  |
-| Base datos | MongoDB Atlas (Mongoose)             |
-| Auth       | JWT (jsonwebtoken + bcryptjs)        |
-| Deploy FE  | Vercel                               |
-| Deploy BE  | Render                               |
-
----
-
-## 📁 Estructura del Proyecto
-
-```
-proyecto-cursos/
-├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   │   ├── auth.controller.js      # Login y perfil
-│   │   │   └── curso.controller.js     # CRUD cursos
-│   │   ├── middleware/
-│   │   │   └── auth.middleware.js      # Verificación JWT
-│   │   ├── models/
-│   │   │   ├── User.js                 # Modelo usuario
-│   │   │   └── Curso.js               # Modelo curso
-│   │   ├── routes/
-│   │   │   ├── auth.routes.js
-│   │   │   └── curso.routes.js
-│   │   ├── validators/
-│   │   │   └── curso.validator.js
-│   │   ├── app.js                      # Express + CORS
-│   │   ├── server.js                   # Entrada + MongoDB
-│   │   └── seed.js                     # Crear usuario admin
-│   ├── .env.example
-│   ├── .gitignore
-│   └── package.json
-│
-└── frontend/
-    ├── src/
-    │   ├── features/
-    │   │   ├── auth/
-    │   │   │   ├── api/axios.js        # Cliente HTTP + interceptores
-    │   │   │   ├── components/
-    │   │   │   │   ├── LoginPage.jsx   # Formulario login
-    │   │   │   │   ├── CursoForm.jsx   # Crear curso
-    │   │   │   │   ├── CursoList.jsx   # Tabla de cursos
-    │   │   │   │   └── CursoItem.jsx   # Fila editable
-    │   │   │   ├── context/
-    │   │   │   │   └── AuthContext.jsx # Estado global de sesión
-    │   │   │   └── services/
-    │   │   │       └── curso.service.js # Llamadas a la API
-    │   │   └── layout/
-    │   │       ├── Header.jsx          # Navbar fija
-    │   │       ├── Footer.jsx
-    │   │       └── LandingPage.jsx     # Página principal
-    │   ├── dashboard/
-    │   │   └── Dashboard.jsx           # Panel CRUD (ruta protegida)
-    │   ├── shared/
-    │   │   └── styles.css
-    │   ├── AppRoutes.jsx               # Rutas + PrivateRoute
-    │   └── main.jsx
-    ├── index.html
-    ├── vite.config.js
-    ├── .env.example
-    ├── .gitignore
-    └── package.json
-```
-
----
-
-## ⚙️ Variables de Entorno
-
-### Backend (`backend/.env`)
-```env
-PORT=4000
-MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/cursos_db
-JWT_SECRET=clave_secreta_muy_larga
-JWT_EXPIRES_IN=8h
-```
-
-### Frontend (`frontend/.env`)
-```env
-VITE_API_URL=https://tu-backend.onrender.com/api
-```
-
----
-
-## 🚀 Instalación y Ejecución Local
-
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/tu-usuario/proyecto-cursos.git
-cd proyecto-cursos
-```
-
-### 2. Configurar y correr el Backend
-```bash
-cd backend
-cp .env.example .env
-# Editar .env con tu MONGODB_URI y JWT_SECRET
-
+Características Principales
+- Registro e inicio de sesión de usuarios
+- Autenticación mediante JWT
+- Gestión de gastos personales
+- Visualización de información financiera
+- Protección de rutas privadas
+- Interfaz rápida y optimizada
+- Diseño responsive
+- Instalación
+  
+Clonar el repositorio:
+git clone https://github.com/jbs2507/proyectocursos-frontend.git
+Acceder al proyecto:
+cd proyectocursos-frontend
+Instalar dependencias:
 npm install
-npm run seed     # Crea usuario admin inicial
-npm run dev      # Servidor en http://localhost:4000
-```
+Ejecución
+Para iniciar el proyecto en modo desarrollo:
+npm run dev
 
-### 3. Configurar y correr el Frontend
-```bash
-cd frontend
-cp .env.example .env
-# Editar .env con VITE_API_URL=http://localhost:4000/api
+El proyecto se ejecutará en:
+http://localhost:5173
+Tecnologías Utilizadas
+React
+Vite
+CSS / Tailwind CSS
+Axios
+JSON Web Token (JWT)
 
-npm install
-npm run dev      # App en http://localhost:5173
-```
+Arquitectura / Encarpetado
+src/
+│── assets/          # Recursos estáticos (imágenes, íconos)
+│── components/      # Componentes reutilizables
+│── pages/           # Vistas principales
+│── services/        # Peticiones a la API (Axios)
+│── context/         # Manejo de estado global
+│── App.jsx          # Componente principal
+│── main.jsx         # Punto de entrada
 
----
+Screenshot de la Interfaz
 
-## 🌐 Despliegue
+(Debes agregar una imagen de tu aplicación)
 
-### Backend en Render
-1. Conectar repositorio en [render.com](https://render.com)
-2. Tipo: **Web Service** → Runtime: **Node**
-3. Build command: `npm install`
-4. Start command: `node src/server.js`
-5. Agregar variables de entorno en el panel de Render
+<img width="1915" height="1079" alt="image" src="https://github.com/user-attachments/assets/2644f1c1-409d-4cee-829e-a1d4ebbb27bb" />
 
-### Frontend en Vercel
-1. Conectar repositorio en [vercel.com](https://vercel.com)
-2. Framework: **Vite**
-3. Root Directory: `frontend`
-4. Agregar variable de entorno: `VITE_API_URL=https://tu-backend.onrender.com/api`
-
----
-
-## 📡 Endpoints API
-
-| Método | Endpoint            | Descripción              | Auth |
-|--------|---------------------|--------------------------|------|
-| POST   | /api/auth/login     | Iniciar sesión           | ❌   |
-| GET    | /api/auth/me        | Perfil del usuario       | ✅   |
-| GET    | /api/cursos         | Listar cursos            | ✅   |
-| POST   | /api/cursos         | Crear curso              | ✅   |
-| GET    | /api/cursos/:id     | Obtener curso por ID     | ✅   |
-| PUT    | /api/cursos/:id     | Actualizar curso         | ✅   |
-| DELETE | /api/cursos/:id     | Eliminar curso           | ✅   |
-
-### Estructura del Curso (MongoDB)
-```js
-db.cursos.insertOne({
-  nombre_curso: "Bases de Datos NoSQL",
-  creditos: 4,
-  docente_id: ObjectId("..."),   // Se asigna del JWT
-  docente_nombre: "Admin",
-  horarios: ["Lunes 8:00", "Miércoles 8:00"],
-  descripcion: "Curso de MongoDB y Redis",
-  activo: true
-});
-```
-
----
-
-## 🔐 Credenciales Demo
-```
-Email:    admin@cursos.com
-Password: Admin123!
-```
-*(Creadas con `npm run seed` en el backend)*
-
----
-
-## 👤 Autor
-Desarrollado como proyecto final — React + Node.js + MongoDB Atlas
+Datos del Autor
+Nombre: Juliana Betancur
+Proyecto: SpendWise
+Tipo: Aplicación web de finanzas personales
+Uso: Académico
+GitHub: https://github.com/jbs2507
