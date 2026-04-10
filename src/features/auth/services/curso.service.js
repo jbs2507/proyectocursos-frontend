@@ -3,7 +3,7 @@ import api from '../api/axios';
 
 /** 🔐 Login */
 export const loginRequest = (data) => {
-    return api.post('/auth/login', data);
+    return api.post('api/auth/login', data);
 };
 
 /** 📝 Registro de usuario */
