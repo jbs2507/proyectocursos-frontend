@@ -2,12 +2,15 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA({
     registerType: "autoUpdate",
-    includeAssets: ['favicon.svg', 'robots.txt', 'icons.svg', 'react.svg', 'vite.svg', 'pwa-192x192.png', 'pwa-512x512.png', 'icono.png'],
-    workbox:{
+    includeAssets: [
+      'img/pwa-192x192.png',
+      'img/icono-512x512.png',
+      'img/gastos-512x512.png'
+    ],
+    workbox: {
       navigateFallback: "/index.html",
       globPatterns: ["**/*.{js,jsx,css,html,ico,png,svg}"]
     },
@@ -18,42 +21,25 @@ export default defineConfig({
       start_url: "/",
       display: "standalone",
       background_color: "#ffffff",
-      theme_color: "#00000000",
-
-      screenshots: [
-        {
-          src: '/img/gastos.png',
-          sizes: '512x512',
-          type: "image/png",
-          form_factor: "narrow"
-        },
-        {
-          src: '/img/gastos-desktop.png',
-          sizes: "1280x720",
-          type: "image/png",
-          form_factor: "wide"
-        }
-      ]
-      ,
+      theme_color: "#000000",
       icons: [
         {
-          src: '/img/pwa-192x192.png',
+          src: 'img/pwa-192x192.png',     // ✅ sin /
           sizes: '192x192',
           type: 'image/png'
         },
         {
-          src: '/img/icono.png',
+          src: 'img/icono-512x512.png',   // ✅ sin /
           sizes: '512x512',
           type: 'image/png'
         },
         {
-          src: '/img/icono.png',
+          src: 'img/icono-512x512.png',   // ✅ sin /
           sizes: '512x512',
           type: 'image/png',
           purpose: 'maskable'
         }
       ]
-
     }
   })],
 })
